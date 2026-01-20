@@ -116,7 +116,7 @@ Este projeto possui **pipeline configurado no GitHub Actions**:
 QA | Automação de Testes | Selenium | Java
 
 🔗 GitHub: [https://github.com/brunotan14](https://github.com/brunotan14)
-🔗 LinkedIn: (adicione aqui)
+🔗 Instagram: @_bnathann
 
 ---
 
