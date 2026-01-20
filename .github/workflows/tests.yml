@@ -1,0 +1,41 @@
+name: Automacao Web
+
+on:
+  pull_request:
+    branches:
+      - main
+
+  schedule:
+    # Todo dia às 03:00 da manhã (UTC)
+    - cron: "0 3 * * *"
+
+  workflow_dispatch: # permite rodar manualmente também
+
+jobs:
+  RunTest:
+    runs-on: windows-latest
+
+    steps:
+
+      - name: Clone do projeto
+        uses: actions/checkout@v5
+
+      - name: Instalar o java
+        uses: actions/setup-java@v4
+        with:
+          java-version: "24"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Install latest Google Chrome
+        uses: browser-actions/setup-chrome@latest
+
+      - name: Run tests
+        run: mvn clean test -Dbrowser=chrome-ci
+
+      - name: Upload Relatório Extent
+        if: always()   # 🔥 ESSENCIAL: sobe o relatório mesmo com falha
+        uses: actions/upload-artifact@v4
+        with:
+          name: Relatorio-Automacao-Web
+          path: target/extent-report.html
