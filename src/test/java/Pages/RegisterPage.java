@@ -19,8 +19,9 @@ public class RegisterPage {
     private By password = By.id("password");
     private By Submit = By.id("btnRegister");
 
+    // os metodos getter(return) servem pra mostrar algo ao usuario
     public RegisterPage(WebDriver driver){
-        this.driver = driver;
+        this.driver = driver;  //o this funciona como setter. pois o this fala basicamente que eu estou me referindo ao driver la em cima, eu estou setando meu driver.
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 

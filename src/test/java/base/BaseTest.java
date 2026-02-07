@@ -7,38 +7,39 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
-import org.junit.rules.TestWatcher;
-import org.junit.runner.Description;
 import org.openqa.selenium.WebDriver;
 import report.ExportReport;
 
-
-public class BaseTest {
+// Tornar essa classe abstrata, evita de rodar essa classe sem testes
+public abstract class BaseTest {
 
     protected ExtentReports extent; //controla o relatorio
     protected WebDriver driver; //controla  o driver
     protected ExtentTest test; // representa um teste especifico no relatorio
 
+    //Basicamente, o rule fala pro Junit antes e depois de cada método de testes, gerenciar o objeto TestName
     @Rule // regra do JUnit para nome do teste(Captura o nome do metodo do teste)
     public TestName testName = new TestName();
 
 
-        @Before
+    @Before
     public void start() {
-        driver = RunBase.getDriver();
+        driver = RunBase.getDriver(); //instancia do metodo da classe RunBase e onde o browser será passado como parametro
         if (!System.getProperty("browser", "").contains("ci")) {
             driver.manage().window().maximize(); // serve para maximizar o navegador selecionado para testes, no modo headless, pode ter erro.
         }
 
         //Relatório
         extent = ExportReport.getInstance(); //obtem a instancia unica do relatorio, garantindo que todos os testes escrevam no mesmo html
-        test = extent.createTest(testName.getMethodName()); // cria uma entrada no relaotiro pra cada teste especifico
+        test = extent.createTest(testName.getMethodName()); // cria uma entrada no relatorio pra cada teste especifico
 
     }
 
     @After
     public void finish(){
-        RunBase.quitDriver();
+        if(driver != null) {
+            RunBase.quitDriver();
+        }
 
         //gravação do relátorio:
         //sem o flush, o relatorio nao e salvo ou fica incompleto

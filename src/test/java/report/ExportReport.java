@@ -14,7 +14,7 @@ public class ExportReport {
 
             //tipo de relatorio(Sprk = html)
             //caminho do arquivo, onde o arquivo html sera gerado
-            ExtentSparkReporter spark = new ExtentSparkReporter("target/extent-report.html");
+            ExtentSparkReporter spark = new ExtentSparkReporter("target/Relatorio-extent.html");
 
             spark.config().setReportName("Relatório da Automação"); // nome exibidio dentro do relatorio
             spark.config().setDocumentTitle("Testes Selenium");
