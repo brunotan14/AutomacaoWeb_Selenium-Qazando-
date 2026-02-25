@@ -12,7 +12,7 @@ on:
 
 jobs:
   RunTest:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do projeto
