@@ -28,11 +28,6 @@ jobs:
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1
 
-      - name: Debug DNS
-        run: |
-          nslookup qazando.com
-          ping -c 4 qazando.com
-
       - name: Run tests
         run: mvn clean test -Dbrowser=chrome-ci
 
