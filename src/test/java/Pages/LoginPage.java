@@ -13,7 +13,6 @@ public class LoginPage{
     public WebDriver driver;
     public WebDriverWait wait;
 
-    private final String URL = "https://www.automationpratice.com.br";
     private By LoginAcess = By.className("fa-user");
     private By InputUser = By.id("user");
     private By InputPassword = By.id("password");
@@ -25,7 +24,7 @@ public class LoginPage{
     }
 
     public void AcessQazando(){
-        driver.get(URL);
+        driver.get("https://www.automationpratice.com.br");
         wait.until(ExpectedConditions.elementToBeClickable(LoginAcess)).click();
     }
 

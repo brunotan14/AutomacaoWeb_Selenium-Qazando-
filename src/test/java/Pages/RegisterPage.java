@@ -12,7 +12,7 @@ public class RegisterPage {
     public WebDriverWait wait;
 
 
-    private final String URL = "https://www.automationpratice.com.br";
+
     private By RegisterAcess = By.className("fa-lock");
     private By Username = By.id("user");
     private By Email = By.id("email");
@@ -26,7 +26,7 @@ public class RegisterPage {
     }
 
     public void AcessRegister(){
-        driver.get(URL);
+        driver.get("https://www.automationpratice.com.br");
         wait.until(ExpectedConditions.elementToBeClickable(RegisterAcess)).click();
     }
 
