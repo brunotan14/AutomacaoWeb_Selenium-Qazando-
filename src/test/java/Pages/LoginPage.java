@@ -5,12 +5,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.net.URL;
 import java.time.Duration;
 
 public class LoginPage{
     public WebDriver driver;
     public WebDriverWait wait;
 
+    private final String URL = "https://www.automationpratice.com.br";
     private By LoginAcess = By.className("fa-user");
     private By InputUser = By.id("user");
     private By InputPassword = By.id("password");
@@ -22,7 +25,7 @@ public class LoginPage{
     }
 
     public void AcessQazando(){
-        driver.get("https://www.automationpratice.com.br/");
+        driver.get(URL);
         wait.until(ExpectedConditions.elementToBeClickable(LoginAcess)).click();
     }
 

@@ -12,7 +12,7 @@ public class RegisterPage {
     public WebDriverWait wait;
 
 
-    String URL = "https://www.automationpratice.com.br";
+    private final String URL = "https://www.automationpratice.com.br";
     private By RegisterAcess = By.className("fa-lock");
     private By Username = By.id("user");
     private By Email = By.id("email");
