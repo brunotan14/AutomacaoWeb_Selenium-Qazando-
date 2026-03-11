@@ -15,8 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: selenium/standalone-chrome:latest
+      options: --user root
 
     steps:
+      - name: instalar Git
+        run: apt-get update && apt-get install -y git
+
       - name: Checkout do projeto
         uses: actions/checkout@v4
 
