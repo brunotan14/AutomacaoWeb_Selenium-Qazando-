@@ -13,16 +13,22 @@ on:
 jobs:
   RunTest:
     runs-on: ubuntu-latest
-    container:
-      image: selenium/standalone-chrome:latest
-      options: --user root
 
     steps:
-      - name: instalar Git
-        run: apt-get update && apt-get install -y git
-
       - name: Checkout do projeto
         uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Instalar Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
 
       - name: Run tests
         run: mvn clean test -Dbrowser=chrome-ci
