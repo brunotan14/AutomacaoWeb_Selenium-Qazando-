@@ -8,11 +8,11 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 
-public class RunBase {
+public class DriverFactory {
 
     private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
-    private RunBase() {}
+    private DriverFactory() {}
 
     public static WebDriver getDriver() {
         String browser = System.getProperty("browser", "chrome");

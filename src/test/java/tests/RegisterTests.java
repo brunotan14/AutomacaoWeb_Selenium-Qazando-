@@ -12,11 +12,8 @@ import org.openqa.selenium.By;
 public class RegisterTests extends BaseTest {
 
     private RegisterPage registerPage;
-    private Faker faker = new Faker();
     private LoginPage loginPage;
-    String user;
-    String email;
-    String senha;
+    private Faker faker = new Faker();
 
     @Before
     public void Start(){
@@ -30,12 +27,12 @@ public class RegisterTests extends BaseTest {
 
         test.info("Iniciando Teste de cadastro com sucesso");
 
-         user = faker.name().fullName();
-         email = faker.internet().emailAddress();
-         senha = faker.internet().password(6, 10);
+         String user = faker.name().fullName();
+         String email = faker.internet().emailAddress();
+         String senha = faker.internet().password(6, 10);
 
         test.info("Preenchendo Dados do usuário");
-        registerPage.FillCredencials(user, email, senha);
+        registerPage.registeruser(user, email, senha);
         registerPage.RegisterSubmitt();
 
         test.info("Validando mensagem de sucesso");
@@ -50,11 +47,11 @@ public class RegisterTests extends BaseTest {
         test.info("Teste de cadastro sem entrada do nome");
 
         String nome = "";
-        email = faker.name().firstName();
-        senha = faker.internet().password(3, 5);
+        String email = faker.name().firstName();
+        String senha = faker.internet().password(3, 5);
 
         test.info("Entrada do email e senha");
-        registerPage.FillCredencials(nome, email, senha);
+        registerPage.registeruser(nome, email, senha);
         registerPage.RegisterSubmitt();
 
         test.info("Validando mensagem de error.");
@@ -68,12 +65,12 @@ public class RegisterTests extends BaseTest {
 
         test.info("Teste de cadastro com senha inferior a 6 dígitos");
 
-        user = faker.name().fullName();
-        email = faker.internet().emailAddress();
-        senha = faker.internet().password(3, 5);
+        String user = faker.name().fullName();
+        String email = faker.internet().emailAddress();
+        String senha = faker.internet().password(3, 5);
 
         test.info("Entrada das credenciais(senha de 5 digitos)");
-        registerPage.FillCredencials(user, email, senha);
+        registerPage.registeruser(user, email, senha);
 
         test.info("Clicando no botão de submit");
         registerPage.RegisterSubmitt();
@@ -88,12 +85,12 @@ public class RegisterTests extends BaseTest {
     public void RegisterEmailInvalid(){
         test.info("Teste de cadastro com email invalido");
 
-        user = faker.name().fullName();
-        email = faker.name().firstName();
-        senha = faker.internet().password(6,10);
+        String user = faker.name().fullName();
+        String email = faker.name().firstName();
+        String senha = faker.internet().password(6,10);
 
         test.info("Entrada das credenciais");
-        registerPage.FillCredencials(user, email, senha);
+        registerPage.registeruser(user, email, senha);
         test.info("Clicando no botão de Registrar");
         registerPage.RegisterSubmitt();
 

@@ -1,6 +1,6 @@
 package base;
 
-import Run.RunBase;
+import Run.DriverFactory;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.junit.After;
@@ -24,7 +24,7 @@ public abstract class BaseTest {
 
     @Before
     public void start() {
-        driver = RunBase.getDriver(); //instancia do metodo da classe RunBase e onde o browser será passado como parametro
+        driver = DriverFactory.getDriver(); //instancia do metodo da classe RunBase e onde o browser será passado como parametro
         if (!System.getProperty("browser", "").contains("ci")) {
             driver.manage().window().maximize(); // serve para maximizar o navegador selecionado para testes, no modo headless, pode ter erro.
         }
@@ -38,7 +38,7 @@ public abstract class BaseTest {
     @After
     public void finish(){
         if(driver != null) {
-            RunBase.quitDriver();
+            DriverFactory.quitDriver();
         }
 
         //gravação do relátorio:
