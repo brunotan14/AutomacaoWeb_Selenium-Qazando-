@@ -4,21 +4,16 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
-public class LoginPage{
-    public WebDriver driver;
-    public WebDriverWait wait;
 
+public class LoginPage extends BasePage {
     private By LoginAcess = By.className("fa-user");
     private By InputUser = By.id("user");
     private By InputPassword = By.id("password");
     private By Submit = By.id("btnLogin");
 
     public LoginPage(WebDriver driver){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     public void AcessQazando(){
