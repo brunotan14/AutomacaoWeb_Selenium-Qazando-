@@ -1,29 +1,39 @@
-name: Automacao Web
+name: CI - Selenium + Java
 
 on:
   push:
-    branches:
-      - main
-
-  schedule:
-    - cron: "0 3 * * *"
-
-  workflow_dispatch:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  RunTest:
+  test:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 30
     steps:
-      - name: Rodar automação via Docker
-        run: |
-          docker run --rm \
-            -v ${{ github.workspace }}:/app \
-            brunonathan14/automacao_qazando:v1.0.0
+      - uses: actions/checkout@v4
 
-      - name: Upload Relatório Extent
+      - name: Build Docker image
+        run: docker build -t qazando-ci:${{ github.sha }} .
+
+      - name: Prepare target dir
+        run: mkdir -p target
+
+      - name: Run tests (inside Docker)
+        run: docker run --rm --shm-size=2g -v "${{ github.workspace }}/target:/app/target" qazando-ci:${{ github.sha }}
+
+      - name: Upload Extent report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: Relatorio-Automacao-Web
-          path: target/extent-report.html
+          name: extent-report
+          path: target/Relatorio-extent.html
+          if-no-files-found: warn
+
+      - name: Upload Surefire reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports
+          if-no-files-found: warn

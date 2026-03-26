@@ -34,6 +34,7 @@ public class DriverFactory {
                     options.addArguments(
                             "--headless=new",
                             "--window-size=1920,1080",
+                            "--no-sandbox",
                             "--disable-dev-shm-usage",
                             "--remote-allow-origins=*"
                     );
