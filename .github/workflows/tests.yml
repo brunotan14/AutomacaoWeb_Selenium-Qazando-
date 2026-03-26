@@ -15,23 +15,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do projeto
-        uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: maven
-
-      - name: Instalar Google Chrome
+      - name: Rodar automação via Docker
         run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-
-      - name: Run tests
-        run: mvn clean test -Dbrowser=chrome-ci
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            brunonathan14/automacao_qazando:v1.0.0
 
       - name: Upload Relatório Extent
         if: always()
